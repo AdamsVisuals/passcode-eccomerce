@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassCode ElectroniX - Premium Electronics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#0a1f3a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Smooth background transition for header */
+        .header-transparent {
+            background-color: rgba(255, 255, 255, 0);
+            transition: background-color 0.3s ease;
+        }
+        
+        .header-solid {
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        
+        /* Mobile menu animation */
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .mobile-menu {
+            animation: slideIn 0.3s forwards;
+        }
+    </style>
+</head>
+<body class="bg-white text-dark-blue">
+    <!-- Header Section -->
+    <header id="main-header" class="fixed w-full z-50 header-transparent py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold">
+                        <img src="images/passcode-logo.png" alt="PassCode ElectroniX Logo" class="h-10">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium hover:text-blue-600 transition">Home</a>
+                    <a href="#featured-products" class="font-medium hover:text-blue-600 transition">Products</a>
+                    <a href="#premium-hot-deals" class="font-medium hover:text-blue-600 transition">Deals</a>
+                    <a href="#" class="font-medium hover:text-blue-600 transition">About</a>
+                    <a href="#" class="font-medium hover:text-blue-600 transition">Contact</a>
+                </nav>
+                
+                <!-- Search and Cart -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Bar - Hidden on mobile -->
+                    <div class="hidden md:flex items-center relative">
+                        <input type="text" placeholder="Search products..." class="py-2 px-4 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-dark-blue focus:border-transparent w-64">
+                        <button class="absolute right-3 text-gray-500 hover:text-dark-blue">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Cart Icon -->
+                    <div class="relative">
+                        <button id="cart-button" class="p-2 text-dark-blue hover:text-blue-600 transition">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span id="cart-count" class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden p-2 text-dark-blue focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 hidden bg-black bg-opacity-50">
+        <div class="absolute right-0 top-0 h-full w-4/5 bg-white mobile-menu">
+            <div class="p-4">
+                <div class="flex justify-between items-center mb-8">
+                    <img src="images/passcode-logo.png" alt="PassCode ElectroniX Logo" class="h-8">
+                    <button id="close-mobile-menu" class="p-2 text-dark-blue">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Search -->
+                <div class="mb-6 relative">
+                    <input type="text" placeholder="Search products..." class="w-full py-2 px-4 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-dark-blue focus:border-transparent">
+                    <button class="absolute right-3 top-2.5 text-gray-500 hover:text-dark-blue">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Navigation -->
+                <nav class="flex flex-col space-y-4">
+                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Home</a>
+                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Products</a>
+                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Deals</a>
+                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">About</a>
+                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+<!-- Full-screen Hero Section with Dynamic Content -->
+<section class="relative h-screen w-full overflow-hidden">
+    <!-- Slideshow Container -->
+    <div class="absolute inset-0 z-0">
+        <!-- Slide 1 -->
+        <div class="absolute inset-0 bg-[url('images/arpad-czapp-3HmjBAwdAxo-unsplash.jpg')] bg-cover bg-center transition-opacity duration-1000 opacity-100"></div>
+        <!-- Slide 2 -->
+        <div class="absolute inset-0 bg-[url('images/alan-j-hendry-KNt4zd8HPb0-unsplash.jpg')] bg-cover bg-center transition-opacity duration-1000 opacity-0"></div>
+        <!-- Slide 3 -->
+        <div class="absolute inset-0 bg-[url('images/clay-banks-Tq3ZJxgiugs-unsplash.jpg')] bg-cover bg-center transition-opacity duration-1000 opacity-0"></div>
+        <!-- Dark gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/50 to-gray-900/30"></div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="relative z-10 h-full flex items-center">
+        <div class="container mx-auto px-6 md:px-12 lg:px-24">
+            <!-- Slide 1 Content -->
+            <div class="max-w-2xl slide-content opacity-100">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight text-white">
+                    Premium Electronics <br>
+                    <span class="text-blue-400">For the Modern Lifestyle</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200">
+                    Discover cutting-edge technology with PassCode ElectroniX - where innovation meets elegance.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
+                        Shop Now
+                    </button>
+                    <button class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                        Explore Deals
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 2 Content -->
+            <div class="max-w-2xl slide-content absolute top-1/2 transform -translate-y-1/2 opacity-0">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight text-white">
+                    Smart Home <br>
+                    <span class="text-green-400">Automation Solutions</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200">
+                    Transform your living space with our intelligent home ecosystem.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/30">
+                        View Smart Home
+                    </button>
+                    <button class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                        Book Consultation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 3 Content -->
+            <div class="max-w-2xl slide-content absolute top-1/2 transform -translate-y-1/2 opacity-0">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight text-white">
+                    Professional <br>
+                    <span class="text-purple-400">Audio Equipment</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200">
+                    Studio-quality sound systems for audiophiles and creators.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/30">
+                        Browse Audio
+                    </button>
+                    <button class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                        Demo Request
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Line pagination indicators -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-3">
+            <div class="h-1 w-8 bg-white cursor-pointer pagination-line active"></div>
+            <div class="h-1 w-8 bg-white/50 cursor-pointer pagination-line"></div>
+            <div class="h-1 w-8 bg-white/50 cursor-pointer pagination-line"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Slideshow Animation Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.absolute.inset-0.bg-cover');
+        const slideContents = document.querySelectorAll('.slide-content');
+        const paginationLines = document.querySelectorAll('.pagination-line');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        function showSlide(index) {
+            // Hide all slides and content
+            slides.forEach(slide => slide.style.opacity = '0');
+            slideContents.forEach(content => content.style.opacity = '0');
+            paginationLines.forEach(line => line.classList.replace('bg-white', 'bg-white/50'));
+            
+            // Show current slide and content
+            slides[index].style.opacity = '1';
+            slideContents[index].style.opacity = '1';
+            paginationLines[index].classList.replace('bg-white/50', 'bg-white');
+            
+            currentSlide = index;
+        }
+        
+        // Auto-rotate slides every 5 seconds
+        function nextSlide() {
+            showSlide((currentSlide + 1) % totalSlides);
+        }
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        // Click handler for pagination
+        paginationLines.forEach((line, index) => {
+            line.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(index);
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+        });
+        
+        // Initialize first slide
+        showSlide(0);
+    });
+</script>
+
+<style>
+    .slide-content {
+        transition: opacity 0.8s ease-in-out;
+    }
+    .pagination-line {
+        transition: all 0.3s ease;
+    }
+    .pagination-line:hover {
+        background-color: rgba(255,255,255,0.8) !important;
+        transform: scaleY(1.5);
+    }
+</style>
+
+<!-- Product Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8">Featured Products</h2>
+        
+        <!-- Minimal Category Navigation -->
+        <div class="flex flex-wrap justify-center gap-6 mb-12">
+            <button class="category-btn flex items-center text-gray-600 hover:text-dark-blue transition" data-category="all">
+                <i class="fas fa-boxes text-lg mr-2"></i>
+                <span class="font-medium">All Products</span>
+            </button>
+            <button class="category-btn flex items-center text-gray-600 hover:text-dark-blue transition" data-category="phones">
+                <i class="fas fa-mobile-alt text-lg mr-2"></i>
+                <span class="font-medium">Smartphones</span>
+            </button>
+            <button class="category-btn flex items-center text-gray-600 hover:text-dark-blue transition" data-category="laptops">
+                <i class="fas fa-laptop text-lg mr-2"></i>
+                <span class="font-medium">Laptops</span>
+            </button>
+            <button class="category-btn flex items-center text-gray-600 hover:text-dark-blue transition" data-category="audio">
+                <i class="fas fa-headphones text-lg mr-2"></i>
+                <span class="font-medium">Audio</span>
+            </button>
+            <button class="category-btn flex items-center text-gray-600 hover:text-dark-blue transition" data-category="wearables">
+                <i class="fas fa-clock text-lg mr-2"></i>
+                <span class="font-medium">Wearables</span>
+            </button>
+            <button class="category-btn flex items-center text-gray-600 hover:text-dark-blue transition" data-category="cameras">
+                <i class="fas fa-camera text-lg mr-2"></i>
+                <span class="font-medium">Cameras</span>
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Product 1 - Smartphones -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="phones">
+                <div class="relative">
+                    <img src="images/Galaxy_Fold4_Flip4_Buds2pro_PR_dl4_1662358399158.jpg" alt="Smartphones" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2 flex flex-col space-y-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">New</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">Smartphones</h3>
+                    <p class="text-gray-600">Samsung, iPhone, Google Pixel & More</p>
+                    <a href="smartphones.html" class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition block text-center">
+                        View Details
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 2 - Laptops -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="laptops">
+                <div class="relative">
+                    <img src="images/andrey-matveev-qmcTZZ7XhqY-unsplash.jpg" alt="Laptops" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">Laptops</h3>
+                    <p class="text-gray-600">HP, Dell, Mac, Toshiba, Lenovo & More</p>
+                    <a href="laptops.html" class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition block text-center">
+                        View Details
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 3 - TVs -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="wearables">
+                <div class="relative">
+                    <img src="images/HomeBanner_1920x960_GTV-1920x960.jpg" alt="TVs & Displays" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">TVs & Displays</h3>
+                    <p class="text-gray-600">Samsung, Sony, Hisense, LG & More</p>
+                    <a href="tv.html" class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition block text-center">
+                        View Details
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 4 - Audio -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="audio">
+                <div class="relative">
+                    <img src="images/AX5100G_340.webp" alt="Sound Systems" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">Sound Systems</h3>
+                    <p class="text-gray-600">JBL, Sony, Hisense, Samsung & More</p>
+                    <a href="audio.html" class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition block text-center">
+                        View Details
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 5 - Security Cameras -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="cameras">
+                <div class="relative">
+                    <img src="images/IMG_8570-scaled-e1706794495367.webp" alt="Security Cameras" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2 flex flex-col space-y-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                        <span class="bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded">Popular</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">Security Cameras</h3>
+                    <p class="text-gray-600">Dahua, HIKVISION, Ezviz, TP-Link, Arlo & More</p>
+                    <button class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+                        View Details
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Product 6 - Home Appliances -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="all">
+                <div class="relative">
+                    <img src="images/nrd-FDQFZHY9iG4-unsplash.jpg" alt="Home Appliances" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">Home Appliances</h3>
+                    <p class="text-gray-600">Refrigerators, Washing Machines & More</p>
+                    <button class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+                        View Details
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Product 7 - Smart Watches -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="wearables">
+                <div class="relative">
+                    <img src="images/cafer-mert-ceyhan-LAY19dUD_ro-unsplash.jpg" alt="Smart Watches" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">Accessories</h3>
+                    <p class="text-gray-600">Keyboards, Mice, Chargers & More</p>
+                    <button class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+                        View Details
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Product 8 - Gaming Consoles -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition" data-category="all">
+                <div class="relative">
+                    <img src="images/techietech-tech-6ZXP-5-jJts-unsplash.jpg" alt="Gaming Consoles" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <button class="wishlist-btn bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">Networking Products</h3>
+                    <p class="text-gray-600">Routers, Switches, Access Points & More</p>
+                    <button class="mt-3 w-full bg-dark-blue text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+                        View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Category Filtering Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active category button
+                categoryBtns.forEach(b => b.classList.remove('text-dark-blue', 'font-semibold'));
+                this.classList.add('text-dark-blue', 'font-semibold');
+                
+                const category = this.dataset.category;
+                
+                // Filter products
+                productCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Wishlist functionality
+        const wishlistBtns = document.querySelectorAll('.wishlist-btn');
+        wishlistBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                icon.classList.toggle('far');
+                icon.classList.toggle('fas');
+                icon.classList.toggle('text-red-500');
+            });
+        });
+    });
+</script>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50">
+        <div class="absolute right-0 top-0 h-full w-full md:w-1/2 lg:w-1/3 bg-white">
+            <div class="p-6 h-full flex flex-col">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Your Cart (<span id="modal-cart-count">0</span>)</h3>
+                    <button id="close-cart-modal" class="p-2 text-dark-blue">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div id="cart-items" class="flex-grow overflow-y-auto mb-4">
+                    <!-- Cart items will be added here dynamically -->
+                    <div class="text-center py-10 text-gray-500">
+                        <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                </div>
+                
+                <div class="border-t pt-4">
+                    <div class="flex justify-between mb-4">
+                        <span class="font-bold">Subtotal:</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <button class="w-full bg-dark-blue text-white py-3 rounded-full hover:bg-blue-700 transition">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Hot Deals Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-3">Premium Hot Deals</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Limited-time offers on our most premium products. Don't miss out!</p>
+            
+            <!-- Countdown Timer -->
+            <div class="flex justify-center mt-6">
+                <div class="countdown-timer flex space-x-4">
+                    <div class="text-center">
+                        <div class="bg-dark-blue text-white text-2xl font-bold rounded-lg py-2 px-4 w-16" id="days">00</div>
+                        <span class="text-xs text-gray-500 mt-1">Days</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-dark-blue text-white text-2xl font-bold rounded-lg py-2 px-4 w-16" id="hours">00</div>
+                        <span class="text-xs text-gray-500 mt-1">Hours</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-dark-blue text-white text-2xl font-bold rounded-lg py-2 px-4 w-16" id="minutes">00</div>
+                        <span class="text-xs text-gray-500 mt-1">Minutes</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-dark-blue text-white text-2xl font-bold rounded-lg py-2 px-4 w-16" id="seconds">00</div>
+                        <span class="text-xs text-gray-500 mt-1">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Deal 1 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Flagship Smartphone" class="w-full h-48 object-cover">
+                    <div class="absolute top-0 left-0 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-br-lg">50% OFF</div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-xl">Quantum X Pro</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">Limited Stock</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Flagship smartphone with pro camera system</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold text-red-600">$499</span>
+                            <span class="text-sm text-gray-500 line-through ml-2">$999</span>
+                        </div>
+                        <button class="bg-dark-blue hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-full transition">
+                            Grab Deal
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal 2 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Premium Laptop" class="w-full h-48 object-cover">
+                    <div class="absolute top-0 left-0 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-br-lg">35% OFF</div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-xl">Nebula Ultrabook</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">Almost Gone</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Slim powerhouse with OLED display</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold text-red-600">$1,299</span>
+                            <span class="text-sm text-gray-500 line-through ml-2">$1,999</span>
+                        </div>
+                        <button class="bg-dark-blue hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-full transition">
+                            Grab Deal
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal 3 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Noise Cancelling Headphones" class="w-full h-48 object-cover">
+                    <div class="absolute top-0 left-0 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-br-lg">40% OFF</div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-xl">Aurora Elite</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">Bestseller</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Premium noise cancelling headphones</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold text-red-600">$179</span>
+                            <span class="text-sm text-gray-500 line-through ml-2">$299</span>
+                        </div>
+                        <button class="bg-dark-blue hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-full transition">
+                            Grab Deal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <button class="border-2 border-dark-blue text-dark-blue hover:bg-dark-blue hover:text-white font-bold py-3 px-8 rounded-full transition">
+                View All Deals
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Immersive Mega CTA Section -->
+<section class="relative py-28 bg-gray-900 overflow-hidden">
+    <!-- Tech Pattern Background -->
+    <div class="absolute inset-0 z-0 opacity-10">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/20 to-black/80"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">All-in-One Tech Hub</span>
+            </h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                From cutting-edge gadgets to premium services - we've got everything to power your digital lifestyle.
+            </p>
+
+            <!-- Interactive Service Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+                <div class="service-card bg-gray-800/50 hover:bg-blue-900/30 border border-gray-700 hover:border-blue-500 rounded-xl p-6 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-blue-600/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-blue-500/30 transition">
+                        <i class="fas fa-mobile-alt text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Premium Devices</h3>
+                    <p class="text-sm text-gray-400">Flagship smartphones & tablets</p>
+                </div>
+                
+                <div class="service-card bg-gray-800/50 hover:bg-purple-900/30 border border-gray-700 hover:border-purple-500 rounded-xl p-6 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-purple-600/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-purple-500/30 transition">
+                        <i class="fas fa-laptop-code text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Power Computing</h3>
+                    <p class="text-sm text-gray-400">High-performance laptops & PCs</p>
+                </div>
+                
+                <div class="service-card bg-gray-800/50 hover:bg-cyan-900/30 border border-gray-700 hover:border-cyan-500 rounded-xl p-6 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-cyan-600/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-cyan-500/30 transition">
+                        <i class="fas fa-home text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Smart Home</h3>
+                    <p class="text-sm text-gray-400">Automation solutions</p>
+                </div>
+                
+                <div class="service-card bg-gray-800/50 hover:bg-green-900/30 border border-gray-700 hover:border-green-500 rounded-xl p-6 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-green-600/20 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-green-500/30 transition">
+                        <i class="fas fa-tools text-2xl text-green-400"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Pro Services</h3>
+                    <p class="text-sm text-gray-400">Repairs & installations</p>
+                </div>
+            </div>
+
+            <!-- Mega CTA -->
+            <div class="bg-gradient-to-r from-blue-900/60 to-purple-900/60 border border-gray-700/50 rounded-2xl p-8 md:p-10 backdrop-blur-sm">
+                <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Transform Your Tech Experience?</h3>
+                <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+                    Join our community for exclusive deals, tech support, and early access to the latest innovations.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://wa.me/+255716077070" target="_blank" class="bg-white hover:bg-gray-100 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fab fa-whatsapp mr-2 text-green-600"></i> Chat on WhatsApp
+                    </a>
+                    <a href="tel:+255716077070" class="bg-transparent border-2 border-white/30 hover:border-white text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-phone-alt mr-2"></i> Call Us Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="mt-12 flex flex-wrap justify-center items-center gap-4 text-sm">
+                <div class="flex items-center bg-gray-800/50 border border-gray-700 rounded-full px-4 py-2">
+                    <i class="fas fa-shield-alt text-green-400 mr-2"></i>
+                    <span class="text-gray-300">Verified Products</span>
+                </div>
+                <div class="flex items-center bg-gray-800/50 border border-gray-700 rounded-full px-4 py-2">
+                    <i class="fas fa-truck text-blue-400 mr-2"></i>
+                    <span class="text-gray-300">Nationwide Delivery</span>
+                </div>
+                <div class="flex items-center bg-gray-800/50 border border-gray-700 rounded-full px-4 py-2">
+                    <i class="fas fa-headset text-purple-400 mr-2"></i>
+                    <span class="text-gray-300">24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trusted Partners Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Trusted Partnerships</h3>
+            <h2 class="text-3xl font-bold text-gray-900">Companies We've Worked With</h2>
+        </div>
+
+        <!-- Logo Carousel -->
+        <div class="relative overflow-hidden">
+            <div class="logo-carousel flex items-center space-x-12 animate-slide">
+                <!-- Logo Items (duplicated for seamless looping) -->
+                <div class="flex-shrink-0">
+                    <img src="images/Toyota.png" alt="Samsung" class="h-12 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/leopard-tours logo.jpg" alt="Sony" class="h-12 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/tanzania-national-parks-tanapa-seeklogo.png" alt="LG" class="h-12 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/PNG-LOGO-ORG.png" alt="Apple" class="h-10 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/aicc.png" alt="Dell" class="h-10 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                
+                <!-- Duplicated logos for seamless looping -->
+                <div class="flex-shrink-0">
+                    <img src="images/Toyota.png" alt="Samsung" class="h-12 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/leopard-tours logo.jpg" alt="Sony" class="h-12 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/tanzania-national-parks-tanapa-seeklogo.png" alt="LG" class="h-12 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/PNG-LOGO-ORG.png" alt="Apple" class="h-10 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="images/aicc.png" alt="Dell" class="h-10 object-contain opacity-80 hover:opacity-100 transition">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes slide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .animate-slide {
+        animation: slide 20s linear infinite;
+        width: max-content;
+    }
+    .logo-carousel:hover .animate-slide {
+        animation-play-state: paused;
+    }
+</style>
+
+<!-- Minimalist White Footer -->
+<footer class="bg-white pt-16 pb-8 border-t border-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <!-- Brand Column -->
+            <div class="md:col-span-2">
+                <div class="flex items-center mb-4">
+                    <img src="images/passcode-logo.png" alt="PassCode ElectroniX" class="h-8 mr-3">
+                    <span class="text-xl font-medium text-gray-900">PassCode<span class="text-blue-600"> ElectroniX</span></span>
+                </div>
+                <p class="text-gray-500 mb-6 max-w-md text-sm">
+                    Premium electronics and tech solutions for modern lifestyles.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-blue-600 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-pink-600 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-red-600 transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Explore</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Products</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Services</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">About</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Support -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Contact</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">FAQs</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Shipping</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Returns</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Legal</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Privacy</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Terms</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-blue-600 transition text-sm">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-8 border-t border-gray-100">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-xs mb-4 md:mb-0">
+                    &copy; <span id="current-year"></span> PassCode ElectroniX. All rights reserved.
+                </p>
+                <div class="text-gray-400 text-xs">
+                    Crafted by <span class="text-gray-600 font-medium">Adams+</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Auto Year Update Script -->
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+<!-- Countdown Timer Script -->
+<script>
+    // Set the date we're counting down to (3 days from now)
+    const countDownDate = new Date();
+    countDownDate.setDate(countDownDate.getDate() + 3);
+
+    // Update the count down every 1 second
+    const x = setInterval(function() {
+        // Get today's date and time
+        const now = new Date().getTime();
+        
+        // Find the distance between now and the count down date
+        const distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Output the result in elements
+        document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+        
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            document.querySelector(".countdown-timer").innerHTML = "DEAL EXPIRED";
+        }
+    }, 1000);
+</script>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+        
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+        
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+        
+        // Header background on scroll
+        const header = document.getElementById('main-header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.remove('header-transparent');
+                header.classList.add('header-solid');
+            } else {
+                header.classList.add('header-transparent');
+                header.classList.remove('header-solid');
+            }
+        });
+        
+        // Cart functionality
+        const cartButton = document.getElementById('cart-button');
+        const closeCartModal = document.getElementById('close-cart-modal');
+        const cartModal = document.getElementById('cart-modal');
+        const cartCount = document.getElementById('cart-count');
+        const modalCartCount = document.getElementById('modal-cart-count');
+        const cartItems = document.getElementById('cart-items');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        
+        let cart = [];
+        
+        // Open/close cart modal
+        cartButton.addEventListener('click', () => {
+            cartModal.classList.remove('hidden');
+        });
+        
+        closeCartModal.addEventListener('click', () => {
+            cartModal.classList.add('hidden');
+        });
+        
+        // Close cart modal when clicking outside
+        cartModal.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.classList.add('hidden');
+            }
+        });
+        
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                
+                // Check if item already in cart
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // Show cart modal when adding an item
+                cartModal.classList.remove('hidden');
+            });
+        });
+        
+        // Update cart UI
+        function updateCart() {
+            // Update cart count
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            modalCartCount.textContent = totalItems;
+            
+            // Update cart items list
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="text-center py-10 text-gray-500">
+                        <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                cartSubtotal.textContent = '$0.00';
+                return;
+            }
+            
+            cartItems.innerHTML = '';
+            
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'flex items-center py-4 border-b';
+                itemElement.innerHTML = `
+                    <div class="flex-grow">
+                        <h4 class="font-medium">${item.name}</h4>
+                        <div class="flex justify-between text-sm text-gray-600 mt-1">
+                            <span>$${item.price.toFixed(2)} × ${item.quantity}</span>
+                            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center ml-4">
+                        <button class="decrease-quantity p-1 text-gray-500 hover:text-dark-blue" data-id="${item.id}">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="mx-2">${item.quantity}</span>
+                        <button class="increase-quantity p-1 text-gray-500 hover:text-dark-blue" data-id="${item.id}">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="remove-item p-1 text-gray-500 hover:text-red-500 ml-2" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                cartItems.appendChild(itemElement);
+            });
+            
+            // Calculate subtotal
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    const item = cart.find(item => item.id === id);
+                    if (item) {
+                        item.quantity += 1;
+                        updateCart();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    const item = cart.find(item => item.id === id);
+                    if (item) {
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                        } else {
+                            cart = cart.filter(item => item.id !== id);
+                        }
+                        updateCart();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    cart = cart.filter(item => item.id !== id);
+                    updateCart();
+                });
+            });
+        }
+        
+        // Search functionality
+        const searchButtons = document.querySelectorAll('button[type="button"] i.fa-search').forEach(button => {
+            button.addEventListener('click', () => {
+                const searchInput = button.parentElement.previousElementSibling;
+                if (searchInput.value.trim()) {
+                    alert(`Searching for: ${searchInput.value}`);
+                    // In a real implementation, you would filter products or make an API call
+                }
+            });
+        });
+    </script>
+</body>
+</html>
