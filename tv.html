@@ -6,134 +6,365 @@
     <title>PassCode ElectroniX - Premium TVs & Displays</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'dark-blue': '#0a1f3a',
-                    }
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'dark-blue': '#0a1f3a',
+                    'glass': 'rgba(255, 255, 255, 0.9)',
+                    'glass-border': 'rgba(255, 255, 255, 0.2)',
+                    'light-text': 'rgba(255, 255, 255, 0.9)',
+                    'dark-text': '#0a1f3a'
+                },
+                backdropBlur: {
+                    'xs': '2px',
                 }
             }
         }
-    </script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
+    }
+</script>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Glass morphism effect */
+    .header-glass {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .header-transparent {
+        background-color: rgba(255, 255, 255, 0);
+        transition: all 0.3s ease;
+    }
+    
+    /* Text color transitions */
+    .text-light {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .text-dark {
+        color: #0a1f3a;
+    }
+    
+    /* Hamburger menu animation */
+    .hamburger {
+        transition: all 0.3s ease;
+        position: relative;
+        width: 24px;
+        height: 20px;
+    }
+    
+    .hamburger span {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: currentColor;
+        border-radius: 2px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: .25s ease-in-out;
+    }
+    
+    .hamburger span:nth-child(1) {
+        top: 0px;
+    }
+    
+    .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+        top: 8px;
+    }
+    
+    .hamburger span:nth-child(4) {
+        top: 16px;
+    }
+    
+    .hamburger.open span:nth-child(1) {
+        top: 8px;
+        width: 0%;
+        left: 50%;
+    }
+    
+    .hamburger.open span:nth-child(2) {
+        transform: rotate(45deg);
+    }
+    
+    .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
+    }
+    
+    .hamburger.open span:nth-child(4) {
+        top: 8px;
+        width: 0%;
+        left: 50%;
+    }
+    
+    /* Mobile menu animation */
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .mobile-menu {
+        animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+    
+    /* Cart animation */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    .cart-pulse {
+        animation: pulse 0.3s ease;
+    }
+    
+    /* Centered navigation on large screens */
+    @media (min-width: 1024px) {
+        .centered-nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        
-        /* Smooth background transition for header */
-        .header-transparent {
-            background-color: rgba(255, 255, 255, 0);
-            transition: background-color 0.3s ease;
-        }
-        
-        .header-solid {
-            background-color: rgba(255, 255, 255, 1);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }
-        
-        /* Mobile menu animation */
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-        
-        .mobile-menu {
-            animation: slideIn 0.3s forwards;
-        }
-        
-        .hero-slide {
-            transition: opacity 1s ease-in-out;
-        }
-        .pagination-line {
-            transition: all 0.3s ease;
-        }
-        .pagination-line:hover {
-            background-color: rgba(255,255,255,0.8) !important;
-            transform: scaleY(1.5);
-        }
-    </style>
+    }
+</style>
 </head>
 <body class="bg-white text-dark-blue">
-    <!-- Header Section -->
-    <header id="main-header" class="fixed w-full z-50 header-transparent py-4">
-        <div class="container mx-auto px-4">
+    <!-- Premium Header Section -->
+    <header id="main-header" class="fixed w-full z-50 header-transparent py-4 text-light">
+        <div class="container mx-auto px-4 relative">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold">
-                        <img src="images/passcode-logo.png" alt="PassCode ElectroniX Logo" class="h-10">
+                <!-- Mobile Hamburger - Left on mobile -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="p-2 focus:outline-none">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Logo - Centered on mobile -->
+                <div class="flex items-center md:flex-1 md:justify-start">
+                    <a href="index.html" class="mx-auto md:mx-0">
+                        <img src="images/passcode-logo.png" alt="PassCode ElectroniX Logo" class="h-10" id="header-logo">
                     </a>
                 </div>
                 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="font-medium hover:text-blue-600 transition">Home</a>
-                    <a href="#featured-products" class="font-medium hover:text-blue-600 transition">Products</a>
-                    <a href="#premium-hot-deals" class="font-medium hover:text-blue-600 transition">Deals</a>
-                    <a href="#" class="font-medium hover:text-blue-600 transition">About</a>
-                    <a href="#" class="font-medium hover:text-blue-600 transition">Contact</a>
+                <!-- Desktop Navigation - Centered on large screens -->
+                <nav class="hidden lg:flex items-center space-x-8 centered-nav">
+                    <a href="index.html" class="font-medium hover:text-white transition duration-300">Home</a>
+                    <a href="#featured-products" class="font-medium hover:text-white transition duration-300">Products</a>
+                    <a href="#premium-hot-deals" class="font-medium hover:text-white transition duration-300">Deals</a>
+                    <a href="#" class="font-medium hover:text-white transition duration-300">About</a>
+                    <a href="#" class="font-medium hover:text-white transition duration-300">Contact</a>
                 </nav>
                 
-                <!-- Search and Cart -->
+                <!-- Search and Cart - Right on mobile -->
                 <div class="flex items-center space-x-4">
                     <!-- Search Bar - Hidden on mobile -->
                     <div class="hidden md:flex items-center relative">
-                        <input type="text" placeholder="Search products..." class="py-2 px-4 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-dark-blue focus:border-transparent w-64">
-                        <button class="absolute right-3 text-gray-500 hover:text-dark-blue">
+                        <input type="text" placeholder="Search products..." class="py-2 px-4 pr-10 rounded-full border border-gray-300 border-opacity-20 bg-white bg-opacity-10 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:border-transparent w-64 transition duration-300">
+                        <button class="absolute right-3 text-gray-200 hover:text-white transition duration-300">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                     
                     <!-- Cart Icon -->
                     <div class="relative">
-                        <button id="cart-button" class="p-2 text-dark-blue hover:text-blue-600 transition">
+                        <button id="cart-button" class="p-2 hover:text-white transition duration-300 relative">
                             <i class="fas fa-shopping-cart text-xl"></i>
-                            <span id="cart-count" class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                            <span id="cart-count" class="absolute -top-1 -right-1 bg-white text-dark-blue text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
                         </button>
                     </div>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-button" class="md:hidden p-2 text-dark-blue focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 hidden bg-black bg-opacity-50">
-        <div class="absolute right-0 top-0 h-full w-4/5 bg-white mobile-menu">
-            <div class="p-4">
-                <div class="flex justify-between items-center mb-8">
+    <!-- Premium Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 hidden bg-black bg-opacity-30 backdrop-blur-sm">
+        <div class="absolute right-0 top-0 h-full w-4/5 bg-dark-blue bg-opacity-95 backdrop-blur-md mobile-menu border-l border-gray-700">
+            <div class="p-6 h-full flex flex-col">
+                <div class="flex justify-between items-center mb-10">
                     <img src="images/passcode-logo.png" alt="PassCode ElectroniX Logo" class="h-8">
-                    <button id="close-mobile-menu" class="p-2 text-dark-blue">
+                    <button id="close-mobile-menu" class="p-2 text-white hover:text-gray-300 transition duration-300">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
                 
                 <!-- Mobile Search -->
-                <div class="mb-6 relative">
-                    <input type="text" placeholder="Search products..." class="w-full py-2 px-4 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-dark-blue focus:border-transparent">
-                    <button class="absolute right-3 top-2.5 text-gray-500 hover:text-dark-blue">
+                <div class="mb-8 relative">
+                    <input type="text" placeholder="Search products..." class="w-full py-3 px-5 pr-10 rounded-full border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition duration-300">
+                    <button class="absolute right-4 top-3.5 text-gray-400 hover:text-white transition duration-300">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
                 
                 <!-- Mobile Navigation -->
-                <nav class="flex flex-col space-y-4">
-                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Home</a>
-                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Products</a>
-                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Deals</a>
-                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">About</a>
-                    <a href="#" class="font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition">Contact</a>
+                <nav class="flex flex-col space-y-2 flex-grow">
+                    <a href="#" class="font-medium py-3 px-4 rounded-lg hover:bg-gray-700 hover:bg-opacity-50 text-white transition duration-300 flex items-center">
+                        <i class="fas fa-home mr-3 text-lg"></i> Home
+                    </a>
+                    <a href="#" class="font-medium py-3 px-4 rounded-lg hover:bg-gray-700 hover:bg-opacity-50 text-white transition duration-300 flex items-center">
+                        <i class="fas fa-box-open mr-3 text-lg"></i> Products
+                    </a>
+                    <a href="#" class="font-medium py-3 px-4 rounded-lg hover:bg-gray-700 hover:bg-opacity-50 text-white transition duration-300 flex items-center">
+                        <i class="fas fa-tag mr-3 text-lg"></i> Deals
+                    </a>
+                    <a href="#" class="font-medium py-3 px-4 rounded-lg hover:bg-gray-700 hover:bg-opacity-50 text-white transition duration-300 flex items-center">
+                        <i class="fas fa-info-circle mr-3 text-lg"></i> About
+                    </a>
+                    <a href="#" class="font-medium py-3 px-4 rounded-lg hover:bg-gray-700 hover:bg-opacity-50 text-white transition duration-300 flex items-center">
+                        <i class="fas fa-envelope mr-3 text-lg"></i> Contact
+                    </a>
                 </nav>
+                
+                <!-- Mobile Footer -->
+                <div class="pt-4 border-t border-gray-700 mt-auto">
+                    <div class="flex space-x-4 justify-center">
+                        <a href="#" class="p-2 text-white hover:text-gray-300 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="p-2 text-white hover:text-gray-300 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="p-2 text-white hover:text-gray-300 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+<script>
+    // Toggle mobile menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburger = document.querySelector('.hamburger');
+    
+    function openMenu() {
+        mobileMenu.classList.remove('hidden');
+        hamburger.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMenu() {
+        mobileMenu.classList.add('hidden');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    
+    mobileMenuButton.addEventListener('click', openMenu);
+    closeMobileMenu.addEventListener('click', closeMenu);
+    
+    // Close when clicking outside the menu
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            closeMenu();
+        }
+    });
+    
+    // Close when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+            closeMenu();
+        }
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('main-header');
+    const headerLogo = document.getElementById('header-logo');
+    const navLinks = document.querySelectorAll('.centered-nav a');
+    const searchInput = document.querySelector('.hidden.md\\:flex input');
+    const searchButton = document.querySelector('.hidden.md\\:flex button');
+    const headerCartButton = document.getElementById('cart-button');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.remove('header-transparent');
+            header.classList.add('header-glass');
+            header.classList.remove('text-light');
+            header.classList.add('text-dark');
+            
+            // Change logo to dark version
+            headerLogo.src = 'images/passcode-logo.png';
+            
+            // Change nav link colors
+            navLinks.forEach(link => {
+                link.classList.remove('hover:text-white');
+                link.classList.add('hover:text-blue-600');
+            });
+            
+            // Change search styles
+            if (searchInput) {
+                searchInput.classList.remove('border-opacity-20', 'bg-opacity-10', 'text-white', 'placeholder-gray-200', 'focus:ring-white', 'focus:ring-opacity-50');
+                searchInput.classList.add('border-gray-300', 'bg-white', 'text-dark-blue', 'placeholder-gray-500', 'focus:ring-dark-blue');
+            }
+            
+            if (searchButton) {
+                searchButton.classList.remove('text-gray-200', 'hover:text-white');
+                searchButton.classList.add('text-gray-500', 'hover:text-dark-blue');
+            }
+            
+            // Change cart icon
+            headerCartButton.classList.remove('hover:text-white');
+            headerCartButton.classList.add('hover:text-blue-600');
+            
+        } else {
+            header.classList.add('header-transparent');
+            header.classList.remove('header-glass');
+            header.classList.add('text-light');
+            header.classList.remove('text-dark');
+            
+            // Change logo to light version
+            headerLogo.src = 'images/passcode-logo.png';
+            
+            // Change nav link colors
+            navLinks.forEach(link => {
+                link.classList.add('hover:text-white');
+                link.classList.remove('hover:text-blue-600');
+            });
+            
+            // Change search styles
+            if (searchInput) {
+                searchInput.classList.add('border-opacity-20', 'bg-opacity-10', 'text-white', 'placeholder-gray-200', 'focus:ring-white', 'focus:ring-opacity-50');
+                searchInput.classList.remove('border-gray-300', 'bg-white', 'text-dark-blue', 'placeholder-gray-500', 'focus:ring-dark-blue');
+            }
+            
+            if (searchButton) {
+                searchButton.classList.add('text-gray-200', 'hover:text-white');
+                searchButton.classList.remove('text-gray-500', 'hover:text-dark-blue');
+            }
+            
+            // Change cart icon
+            headerCartButton.classList.add('hover:text-white');
+            headerCartButton.classList.remove('hover:text-blue-600');
+        }
+    });
+    
+    // Cart animation
+    const headerCartCount = document.getElementById('cart-count');
+    
+    headerCartButton.addEventListener('click', () => {
+        headerCartCount.classList.add('cart-pulse');
+        setTimeout(() => {
+            headerCartCount.classList.remove('cart-pulse');
+        }, 300);
+    });
+</script>
 
 <!-- Full-screen Hero with Slideshow -->
 <section class="relative h-screen w-full overflow-hidden">
@@ -793,52 +1024,6 @@
             document.querySelector(".countdown-timer").innerHTML = "DEAL EXPIRED";
         }
     }, 1000);
-</script>
-
-<script>
-    // Mobile Menu Toggle
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const closeMobileMenu = document.getElementById('close-mobile-menu');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.remove('hidden');
-    });
-    
-    closeMobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-    });
-    
-    // Close mobile menu when clicking outside
-    mobileMenu.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) {
-            mobileMenu.classList.add('hidden');
-        }
-    });
-    
-    // Header background on scroll
-    const header = document.getElementById('main-header');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.remove('header-transparent');
-            header.classList.add('header-solid');
-        } else {
-            header.classList.add('header-transparent');
-            header.classList.remove('header-solid');
-        }
-    });
-    
-    // Search functionality
-    const searchButtons = document.querySelectorAll('button[type="button"] i.fa-search').forEach(button => {
-        button.addEventListener('click', () => {
-            const searchInput = button.parentElement.previousElementSibling;
-            if (searchInput.value.trim()) {
-                alert(`Searching for: ${searchInput.value}`);
-                // In a real implementation, you would filter products or make an API call
-            }
-        });
-    });
 </script>
 
 <script>
